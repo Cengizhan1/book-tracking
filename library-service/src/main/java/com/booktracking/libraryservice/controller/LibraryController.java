@@ -4,18 +4,20 @@ import com.booktracking.libraryservice.dto.AddBookRequest;
 import com.booktracking.libraryservice.dto.LibraryDto;
 import com.booktracking.libraryservice.service.LibraryService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RefreshScope
 @RequestMapping("/v1/api/library")
 public class LibraryController {
     private final LibraryService libraryService;
 
-    @Value("${library-service.book.count}")
-    private String count;
+//    @Value("${library-service.count}")
+//    private Integer count;
 
     public LibraryController(LibraryService libraryService) {
         this.libraryService = libraryService;
@@ -42,8 +44,8 @@ public class LibraryController {
         return ResponseEntity.ok(libraryService.getAllLibraries());
     }
 
-    @GetMapping("/count")
-    public ResponseEntity<String> getCount() {
-        return ResponseEntity.ok("Library count is" + count);
-    }
+//    @GetMapping("/count")
+//    public ResponseEntity<String> getCount() {
+//        return ResponseEntity.ok("Library count is" + count);
+//    }
 }
